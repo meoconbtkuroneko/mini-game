@@ -1,0 +1,8 @@
+<ion-row wrap class="container" align-items-center>
+  <ion-col col-4 *ngFor="let item of cardsArr; let i = index" text-center align-self-center>
+    <button ion-button full color="primary" (click)="clickedItem(item, i)" [ngStyle]="{'background-color': currentColor}">
+      <div>{{item?.name}}</div>
+      <img class="image" [ngClass]="{'add': item?.check || item?.click}" src="{{pathImage + item?.name + '.jpg'}}">
+    </button>
+  </ion-col>
+</ion-row>

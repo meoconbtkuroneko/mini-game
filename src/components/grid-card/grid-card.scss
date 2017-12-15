@@ -1,0 +1,27 @@
+grid-card {
+  ion-row.container {
+    ion-col {
+      button {
+        height: 100px !important;
+        .image {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          left: 0;
+          top: 0;
+          opacity: 0;
+          transform: rotateY(0deg);
+          transition: 0.3s;
+          transform-style: preserve-3d;
+
+          &.add {
+            opacity: 1;
+            transform: rotateY(180deg);
+            transition: 0.4s;
+            transform-style: preserve-3d;
+          }
+        }
+      }
+    }
+  }
+}

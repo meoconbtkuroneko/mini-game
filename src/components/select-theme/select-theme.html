@@ -1,0 +1,3 @@
+<div class="container-theme">
+  <button ion-button class="theme" *ngFor="let item of themeItem?.colors; let i = index" (click)="selectTheme(i)" [ngStyle]="{'background': item}"></button>
+</div>

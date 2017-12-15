@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>TicToe</ion-title>
+    <ion-buttons end>
+      <button-replay (click)="replay()"></button-replay>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-scroll scrollX="true" scrollY="true">
+    <div class="container">
+      <div class="row" *ngFor="let row of arrVal; let i = index">
+        <div class="item" *ngFor="let item of row; let j = index" (click)="clickItem(i,j)">
+          <span class="info" [ngClass]="['item-' + i + '' + j, item?.win && item?.click ? 'win': '']">{{item?.turn}}</span>
+        </div>
+      </div>
+    </div>
+  </ion-scroll>
+</ion-content>

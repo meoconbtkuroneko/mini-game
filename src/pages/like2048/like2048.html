@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>2048</ion-title>
+    <ion-buttons start>
+      <button ion-button [disabled]="!previousNumbersRows" icon-only (click)="rollback()" margin-right>
+        <ion-icon name="undo"></ion-icon>
+      </button>
+      <button-replay (click)="replay()"></button-replay>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div class="container" custom-swipe (onCustomSwipe)="swipeEvent($event)">
+    <div class="row" *ngFor="let i of 4 | loopByNumber">
+      <div class="item" [ngClass]="[
+        (randomItem?.index === index) && (randomItem?.rowName === ('row' + (i + 1))) ? 'random' : '',
+        item.add ? 'add' : '', 
+        item.remove ? 'remove' : '',
+        item?.val ? 'value-' + item?.val : ''
+        ]" *ngFor="let item of numbersRows['row' + (i + 1)]; let index = index">
+        <div class="static-val"></div>
+        <div class="change-val" [ngClass]="item?.val ? 'has-value': ''">
+          <span style="height: 100%;"></span>
+          <span>{{(item?.val != 0) ? item?.val: (item.remove ? 'remove' :null)}}</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="fail" *ngIf="fail">Thuaaaaaaaaaaaaa</div>
+</ion-content>
