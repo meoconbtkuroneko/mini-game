@@ -182,7 +182,6 @@ export class Like2048 {
     if (this.fail) {
       return;
     }
-    let tempArr;
     let tempNumbersRows: any = {};
     if (direction === 'up' || direction === 'down') {
       tempNumbersRows = this.convertToHorizontal(this.numbersRows);

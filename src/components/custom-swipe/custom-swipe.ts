@@ -1,12 +1,10 @@
 import {
   Directive,
-  Input,
   ElementRef,
   Output,
   EventEmitter
 } from '@angular/core';
 import { Gesture } from 'ionic-angular/gestures/gesture';
-import { CONSTANT } from '../../providers/constant';
 
 @Directive({
   selector: '[custom-swipe]' // Attribute selector

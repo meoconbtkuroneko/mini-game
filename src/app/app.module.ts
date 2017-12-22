@@ -8,6 +8,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { Like2048 } from '../pages/like2048/like2048';
 import { TicToe } from '../pages/tic-toe/tic-toe';
+import { FindNumberPage } from '../pages/find-number/find-number';
+import { FindCardPage } from '../pages/find-card/find-card';
 
 import { Background } from '../components/background/background';
 import { SelectTheme } from '../components/select-theme/select-theme';
@@ -29,6 +31,8 @@ import { CustomSwipe } from '../components/custom-swipe/custom-swipe';
     HomePage,
     Like2048,
     TicToe,
+    FindNumberPage,
+    FindCardPage,
     Background,
     SelectTheme,
     ProgressBar,
@@ -47,6 +51,8 @@ import { CustomSwipe } from '../components/custom-swipe/custom-swipe';
     HomePage,
     Like2048,
     TicToe,
+    FindNumberPage,
+    FindCardPage,
     Background,
     SelectTheme,
     ProgressBar,

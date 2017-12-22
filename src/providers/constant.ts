@@ -1,4 +1,17 @@
 export const CONSTANT = {
+  NIGHT_MODE: 'night-mode',
+  MESSAGE: {
+    STR_REPLAY_TITLE: 'Replay',
+    STR_REPLAY_MESSAGE: 'Do you want to replay',
+    STR_YES: 'Yes',
+    STR_NO: 'No',
+    STR_OK: 'OK',
+    STR_CANCEL: 'Cancel',
+    STR_SETTING_TITLE: 'Options',
+    STR_WIN: 'You win!',
+    STR_SHARE: 'Share',
+    NIGHT_MODE: 'Night mode',
+  },
   THEME_COLOR_ARR: [{
       id: 'blossom',
       colors: ['#daa4a2', '#d95473', '#cf415b', '#a82d41']
@@ -43,7 +56,7 @@ export const CONSTANT = {
 };
 
 
-export class Item {
+export class ItemFindCard {
   constructor(
     public name: string,
     public check ? : boolean,

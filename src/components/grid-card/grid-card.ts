@@ -6,7 +6,7 @@ import {
 import { CoreService } from '../../providers/core-service';
 import {
   CONSTANT,
-  Item,
+  ItemFindCard,
   MyTheme,
 } from '../../providers/constant';
 
@@ -34,7 +34,7 @@ export class GridCard extends MyTheme {
   }
 
   // Nhan vao hinh
-  clickedItem(item: Item, index: number) {
+  clickedItem(item: ItemFindCard, index: number) {
     if (item.count || item.check) {
       return;
     }
@@ -78,10 +78,10 @@ export class GridCard extends MyTheme {
 
   // Kiem tra xem 2 hinh anh co trung nhau hay khong
   checkItem() {
-    let tempItem: Item;
+    let tempItem: ItemFindCard;
     let rs: any = {
-      firstItem: Item,
-      secondItem: Item,
+      firstItem: ItemFindCard,
+      secondItem: ItemFindCard,
     };
     for (let i in this.cardsArr) {
       tempItem = this.cardsArr[i];

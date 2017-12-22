@@ -3,15 +3,13 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-// import { HomePage } from '../pages/home/home';
-// import { Like2048 } from '../pages/like2048/like2048';
-import { TicToe } from '../pages/tic-toe/tic-toe';
+import { HomePage } from '../pages/home/home';
 import { CoreService } from '../providers/core-service';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = TicToe;
+  rootPage: any = HomePage;
 
   constructor(
     platform: Platform,

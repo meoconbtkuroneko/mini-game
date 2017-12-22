@@ -1,36 +1,10 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Meoconbt's Games
     </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <background [name]="themeItem?.id"></background>
-  <select-theme></select-theme>
-  <progress-bar [minutes]="initMinutes" (finish)="finishCountDown($event)" [reset]="reset" [stop]="stop"></progress-bar>
-  <grid-card [cardsArr]="currentCardArr" [reset]="reset"></grid-card>
-  <div *ngIf="win || fail" class="container-win">
-    <ion-row wrap class="win" padding align-items-center>
-      <ion-col col-12>
-        {{win ? 'Thắng rồi, tiến lên thôi' : 'Thua nhé!!! Có gì hối tiếc không?'}}
-      </ion-col>
-      <ion-col *ngIf="win" col-12 class="container-star">
-        <span *ngFor="let i of star | loopByNumber" class="star"><ion-icon  name="star" ></ion-icon>&nbsp;</span>
-      </ion-col>
-      <ion-col *ngIf="fail" col-12>
-        <ion-icon name="happy"></ion-icon>
-      </ion-col>
-      <ion-col text-right>
-        <button ion-button color="light" (click)="replay()">
-          Chơi lại
-        </button>
-      </ion-col>
-      <ion-col text-left>
-        <button ion-button color="light" (click)="homePage()">
-          Trang chủ
-        </button>
-      </ion-col>
-    </ion-row>
-  </div>
+  <ion-item (click)="goToGame(item)" *ngFor="let item of allGames">{{item?.name}}</ion-item>
 </ion-content>

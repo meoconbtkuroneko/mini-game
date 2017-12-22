@@ -5,10 +5,6 @@ import {
   EventEmitter,
 } from '@angular/core';
 
-import { CONSTANT } from '../../providers/constant';
-import { CoreService } from '../../providers/core-service';
-
-
 /**
  * Generated class for the ProgressBar component.
  *
@@ -31,9 +27,7 @@ export class ProgressBar {
   totalSeconds: number;
   percent: number;
 
-  constructor(
-    public coreService: CoreService,
-  ) {}
+  constructor() {}
 
   ngOnChanges(changes) {
     if (changes.minutes || (changes.reset && this.reset)) {
