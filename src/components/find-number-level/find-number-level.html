@@ -1,0 +1,83 @@
+<ion-content padding>
+  <div class="game-name">Find
+    <br> the number</div>
+  <div class="container-mode">
+    <div class="mode single-mode" (click)="selectGameMode(gameMode.SINGLE_MODE)">
+      <div class="best"> &nbsp;</div>
+      <div class="mode-icon">
+        <ion-icon name="person"></ion-icon>
+      </div>
+      <div class="name">Single Player</div>
+    </div>
+    <div class="mode time-mode" (click)="selectGameMode(gameMode.TIME_MODE)">
+      <div class="best"> &nbsp;</div>
+      <div class="mode-icon">
+        <ion-icon name="clock"></ion-icon>
+      </div>
+      <div class="name">Time Mode</div>
+    </div>
+    <div class="mode two-player" (click)="selectGameMode(gameMode.TWO_PLAYER)">
+      <div class="">&nbsp;</div>
+      <div class="container-number">
+        <div class="container-width" margin-vertical>
+          <div class="text">59
+            <span class="cover activate"></span>
+          </div>
+        </div>
+        <div class="container-width" margin-vertical>
+          <div class="text">60
+            <span class="cover activate"></span>
+          </div>
+        </div>
+      </div>
+      <div class="name">Two Player</div>
+    </div>
+    <div class="mode odd-even" (click)="selectGameMode(gameMode.ODD_EVEN)">
+      <div class="container-number">
+        <div class="container-width odd" margin-top>
+          <div class="text">&nbsp;1&nbsp;
+            <span class="cover activate"></span>
+          </div>
+        </div>
+        <div class="container-width odd" margin-top>
+          <div class="text">&nbsp;3&nbsp;
+            <span class="cover activate"></span>
+          </div>
+        </div>
+        <div class="container-width odd" margin-top>
+          <div class="text">&nbsp;5&nbsp;
+            <span class="cover activate"></span>
+          </div>
+        </div>
+        <div class="container-width even" margin-vertical>
+          <div class="text">&nbsp;2&nbsp;
+            <span class="cover activate"></span>
+          </div>
+        </div>
+        <div class="container-width even" margin-vertical>
+          <div class="text">&nbsp;4&nbsp;
+            <span class="cover activate"></span>
+          </div>
+        </div>
+        <div class="container-width even" margin-vertical>
+          <div class="text">&nbsp;6&nbsp;
+            <span class="cover activate"></span>
+          </div>
+        </div>
+      </div>
+      <div class="name">Odd & Even Number</div>
+    </div>
+  </div>
+  <ion-row class="container-footer-buttons">
+    <ion-col align-self-end>
+      <button ion-button>
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col align-self-end text-right>
+      <button ion-button>
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-content>

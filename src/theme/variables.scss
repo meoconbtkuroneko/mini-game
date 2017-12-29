@@ -2,19 +2,13 @@
 // http://ionicframework.com/docs/v2/theming/
 // Font path is used to include ionicons,
 // roboto, and noto sans fonts
-$font-path: "../assets/fonts";
-
-
-// The app direction is used to include
+$font-path: "../assets/fonts"; // The app direction is used to include
 // rtl styles in your app. For more info, please see:
 // http://ionicframework.com/docs/theming/rtl-support/
 $app-direction: ltr;
 
 
-@import "ionic.globals";
-
-
-// Shared Variables
+@import "ionic.globals"; // Shared Variables
 // --------------------------------------------------
 // To customize the look and feel of this app, you can override
 // the Sass variables found in Ionic's source scss files.
@@ -34,8 +28,7 @@ light: #f4f4f4,
 dark: #222);
 
 $color-star: #ffeb3b;
-$color-star-dark: #fdd835;
-// App iOS Variables
+$color-star-dark: #fdd835; // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
 // App Material Design Variables
@@ -50,17 +43,56 @@ $color-star-dark: #fdd835;
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's
 // default are overridden.
-@import "ionic.theme.default";
-
-
-// Ionicons
+@import "ionic.theme.default"; // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:
 // http://ionicframework.com/docs/v2/ionicons/
-@import "ionic.ionicons";
-
-
-// Fonts
+@import "ionic.ionicons"; // Fonts
 // --------------------------------------------------
 @import "roboto";
 @import "noto-sans";
+
+@mixin circle-number($val) {
+  .cover {
+    &.activate {
+      position: absolute;
+      transform: rotate(#{$val}deg);
+      border: 0.15em solid;
+      border-top: 0;
+      border-top-left-radius: 1em;
+      border-top-right-radius: 1.5em;
+      border-bottom-right-radius: 2em;
+      border-bottom-left-radius: 2em;
+      left: -.3em;
+      right: -.3em;
+      bottom: -.3em;
+      top: -.1em;
+      transition: border .25s;
+      &::after {
+        content: '';
+        position: absolute;
+        border: 0;
+        border-top: 0.15em solid;
+        border-top-left-radius: 1em;
+        border-top-right-radius: 1em;
+        left: -0.1em;
+        right: 0.2em;
+        bottom: 0em;
+        top: -0.3em;
+        transform: rotate(-10deg);
+      }
+    }
+  }
+  @include color-line(red);
+}
+
+@mixin color-line($color) {
+  .cover {
+    &.activate {
+      border-color: $color;
+      &::after {
+        border-color: $color;
+      }
+    }
+  }
+}

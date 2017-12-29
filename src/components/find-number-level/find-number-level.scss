@@ -1,0 +1,64 @@
+find-number-level {
+  $max: 360;
+  $list: 1;
+  @for $i from 2 through 6 {
+    $val: random($max);
+    $list: append($list, $val)
+  }
+  .game-name {
+    font-size: 3em;
+    height: 30%;
+    line-height: 1.5em;
+    text-align: center;
+  }
+  .container-mode {
+    text-align: center;
+    height: 50%;
+    .mode {
+      border: 3px solid #ddd;
+      display: inline-block;
+      width: 45%;
+      margin: 2% 1%;
+      vertical-align: middle;
+      &>* {
+        align-items: center;
+        text-align: center;
+        min-height: 25%;
+        width: 100%;
+      }
+
+      .mode-icon {
+        font-size: 2em;
+      }
+
+      .container-number {
+        @for $i from 1 through 6 {
+          $val: nth($list, $i);
+          .container-width:nth-child(#{$i}) {
+            width: 30%;
+            display: inline-block;
+            text-align: center;
+            .text {
+              display: inline-block;
+              padding: 3px;
+              position: relative;
+              @include circle-number($val);
+            }
+            &.even {
+              @include color-line(blue);
+            }
+          }
+        }
+      }
+      .two-player {
+        .container-width:nth-child(2n) {
+          @include color-line(blue);
+        }
+      }
+    }
+  }
+  .container-footer-buttons {
+    position: relative;
+    height: 20%;
+  }
+}

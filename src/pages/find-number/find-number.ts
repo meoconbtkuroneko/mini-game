@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Content, AlertController } from 'ionic-angular';
+import { NavController, NavParams, Content, AlertController, ModalController } from 'ionic-angular';
 import { AnywhereService } from '../../providers/anywhere-service';
 import { CONSTANT } from '../../providers/constant';
+import { FindNumberLevelComponent } from '../../components/find-number-level/find-number-level';
 import * as _ from 'lodash';
 /**
  * Generated class for the FindNumberPage page.
@@ -10,8 +11,6 @@ import * as _ from 'lodash';
  * on Ionic pages and navigation.
  */
 
-const WIDTH = 30;
-const HEIGHT = 30;
 const COUNT_WIDTH = 7;
 const COUNT_HEIGHT = 15;
 
@@ -40,6 +39,8 @@ export class FindNumberPage {
   isNightMode;
   gameLevel;
   itemDimention;
+  paddingTop = 20;
+  paddingLeft = 10;
 
   @ViewChild(Content) content: Content;
 
@@ -48,17 +49,17 @@ export class FindNumberPage {
     public navParams: NavParams,
     private alertController: AlertController,
     private anywhereService: AnywhereService,
+    public modalController: ModalController,
   ) {
     this.isNightMode = localStorage.getItem(CONSTANT.NIGHT_MODE) === 'true';
-    this.gameLevel = GAME_LEVEL.EASY;
+    this.gameLevel = GAME_LEVEL.CHALLENGE;
+    this.modalController.create(FindNumberLevelComponent).present();
   }
 
-  ngAfterViewInit() {
+  ionViewDidEnter() {
     console.log("ngAfterViewInit")
-    setTimeout(() => {
-      this.nightMode(this.isNightMode);
-      this.startGame();
-    }, 100);
+    // this.nightMode(this.isNightMode);
+    // this.startGame();
   }
 
   startGame() {
@@ -95,40 +96,51 @@ export class FindNumberPage {
 
   drawAll() {
     let dimen = this.content.getContentDimensions();
-    this.windowWidth = dimen.contentWidth;
-    this.windowHeight = dimen.contentHeight - 35;
-    if (this.gameLevel === GAME_LEVEL.CHALLENGE) {
-      this.windowHeight -= 35;
-    }
+    this.windowWidth = dimen.contentWidth - 20;
+    this.windowHeight = dimen.contentHeight - 40;
     console.log("content", dimen.contentWidth, dimen.contentHeight)
     this.itemDimention = this.getItemDimention();
     let el = document.querySelector('#' + this.currentId);
     el.innerHTML = '';
-    for (let item of this.allNumbers) {
-      el.appendChild(this.createHtml(item));
+    let item;
+    for (let i = 0; i < this.allNumbers.length; i++) {
+      item = this.allNumbers[i];
+      el.appendChild(this.createHtml(item, i));
     }
   }
 
-  createHtml(item: FindNumberItem) {
+  createHtml(item: FindNumberItem, index) {
     let containerCeil = document.createElement('div');
     containerCeil.classList.add('container-ceil');
-    containerCeil.style.display = 'inline-block';
     containerCeil.style.boxSizing = 'border-box';
     containerCeil.style.width = item.getPx(this.itemDimention.width);
     containerCeil.style.height = item.getPx(this.itemDimention.height);
-    containerCeil.style.verticalAlign = item.generateVerticalAlign(this.itemDimention.top * 2);
     containerCeil.style.textAlign = item.generateCenter();
-    if (this.gameLevel !== GAME_LEVEL.EASY) {
-      let random = Common.random(360);
-      containerCeil.style.transform = 'rotate(' + random + 'deg)';
+    containerCeil.style.paddingTop = item.getPx(this.itemDimention.top / 2);
+    containerCeil.style.paddingBottom = item.getPx(this.itemDimention.top / 2);
+    containerCeil.style.paddingLeft = item.getPx(this.itemDimention.left / 2);
+    containerCeil.style.paddingRight = item.getPx(this.itemDimention.left / 2);
+    if (!item.left && !item.top) {
+      item.left = this.windowWidth / 2 - this.itemDimention.width / 2;
+      item.top = this.windowHeight / 2 - this.itemDimention.height / 2;
     }
-
-    let ceil = document.createElement('div');
-    ceil.classList.add('ceil');
-    ceil.style.paddingTop = item.getPx(this.itemDimention.top / 2);
-    ceil.style.paddingBottom = item.getPx(this.itemDimention.top / 2);
-    ceil.style.paddingLeft = item.getPx(this.itemDimention.left / 2);
-    ceil.style.paddingRight = item.getPx(this.itemDimention.left / 2);
+    containerCeil.style.left = item.getPx(item.left);
+    containerCeil.style.top = item.getPx(item.top);
+    setTimeout(() => {
+      let x = index % this.countWidth;
+      item.left = this.paddingLeft + x * (this.itemDimention.width + (2 * this.itemDimention.left));
+      let y = Math.floor(index / this.countWidth);
+      item.top = this.paddingTop + (this.itemDimention.height + 2 * (this.itemDimention.top)) * y +
+        item.generateVerticalAlign(this.itemDimention.top * 2);
+      if (index === this.maxValue - 2) {
+        item.left = Common.random(this.windowWidth / 2 - this.itemDimention.width);
+      }
+      if (index === this.maxValue - 1) {
+        item.left = this.windowWidth / 2 + Common.random(this.windowWidth / 2 - this.itemDimention.width);
+      }
+      containerCeil.style.left = item.getPx(item.left);
+      containerCeil.style.top = item.getPx(item.top);
+    }, 10);
 
     let text = document.createElement('span');
     text.classList.add('text');
@@ -138,6 +150,24 @@ export class FindNumberPage {
     } else {
       text.innerHTML = item.number + '&nbsp';
     }
+
+    if (!item.color) {
+      text.style.color = item.generateColor();
+    } else {
+      text.style.color = item.color;
+    }
+
+    if (this.gameLevel !== GAME_LEVEL.EASY) {
+      let random = Common.random(360);
+      text.style.transform = 'rotate(' + random + 'deg)';
+    }
+
+    if (this.gameLevel === GAME_LEVEL.CHALLENGE) {
+      let fontClass = ['small', 'normal', 'large'];
+      let random = Common.random(fontClass.length);
+      text.classList.add(fontClass[random]);
+    }
+
     const cover = document.createElement('span');
     cover.classList.add('cover');
     cover.setAttribute('id', 'cover-' + item.number);
@@ -150,20 +180,7 @@ export class FindNumberPage {
       this.onClick(event, item);
     });
 
-    if (!item.color) {
-      text.style.color = item.generateColor();
-    } else {
-      text.style.color = item.color;
-    }
-
-    if (this.gameLevel === GAME_LEVEL.CHALLENGE) {
-      let fontClass = ['small', 'normal', 'large'];
-      let random = Common.random(fontClass.length);
-      text.classList.add(fontClass[random]);
-    }
-
-    ceil.appendChild(text);
-    containerCeil.appendChild(ceil);
+    containerCeil.appendChild(text);
     return containerCeil;
   }
 
@@ -193,8 +210,10 @@ export class FindNumberPage {
     let cover = event.srcElement.querySelector('.cover');
     cover.classList.add('activate');
     if (this.gameLevel === GAME_LEVEL.SUPER_EYES) {
-      this.randomValue();
-      this.drawAll();
+      setTimeout(() => {
+        this.randomValue();
+        this.drawAll();
+      }, 250)
     }
     if (this.count === this.maxValue) {
       this.winGame();
@@ -319,6 +338,8 @@ export class FindNumberItem {
   number: number;
   selected: boolean;
   color: string;
+  left: number;
+  top: number;
 
   constructor(number, options ? ) {
     this.number = number;
@@ -337,9 +358,9 @@ export class FindNumberItem {
   generateVerticalAlign(max: number) {
     let alignArr = [];
     let length = max;
-    alignArr.push(length + 'px');
+    alignArr.push(length);
     for (let i = -length; i < length; i += 3) {
-      alignArr.push(i + 'px');
+      alignArr.push(i);
     }
     let random = Math.floor(Math.random() * alignArr.length);
     return alignArr[random];

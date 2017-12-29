@@ -24,6 +24,7 @@ import { CoreService } from '../providers/core-service';
 import { ThemeService } from '../providers/theme-service';
 
 import { CustomSwipe } from '../components/custom-swipe/custom-swipe';
+import { FindNumberLevelComponent } from '../components/find-number-level/find-number-level';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CustomSwipe } from '../components/custom-swipe/custom-swipe';
     ButtonReplay,
     LoopByNumber,
     CustomSwipe,
+    FindNumberLevelComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +60,7 @@ import { CustomSwipe } from '../components/custom-swipe/custom-swipe';
     ProgressBar,
     GridCard,
     ButtonReplay,
+    FindNumberLevelComponent
   ],
   providers: [
     StatusBar,

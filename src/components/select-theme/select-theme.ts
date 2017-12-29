@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 
-import {
-  CONSTANT,
-  ThemeItem,
-} from '../../providers/constant';
+import { ThemeItem } from '../../providers/constant';
 import { CoreService } from '../../providers/core-service';
 
 @Component({

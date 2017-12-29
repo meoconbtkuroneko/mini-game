@@ -9,13 +9,6 @@ page-find-number {
   .night-mode {
     background: black;
   }
-  .scroll-content {
-    // overflow: hidden;
-  }
-  #currentId {
-    text-align: center;
-    padding-top: 10px;
-  }
   @for $i from 1 through 100 {
     $rs: top;
     $val: nth($list, $i);
@@ -29,9 +22,12 @@ page-find-number {
       $rs: left
     }
     .container-ceil:nth-child(#{$i}) {
+      transition: all 0.5s;
+      position: absolute;
       .text {
         padding: 3px;
         position: relative;
+        display: inline-block;
         font-size: 1em;
         &.highlight {
           animation: changeColor 0.4s;
@@ -45,36 +41,7 @@ page-find-number {
         &.large {
           font-size: 1.3em;
         }
-      }
-      .cover {
-        &.activate {
-          position: absolute;
-          transform: rotate(#{$val}deg);
-          border: 0.15em solid red;
-          border-top: 0;
-          border-top-left-radius: 1em;
-          border-top-right-radius: 1.5em;
-          border-bottom-right-radius: 2em;
-          border-bottom-left-radius: 2em;
-          left: -.3em;
-          right: -.3em;
-          bottom: -.3em;
-          top: -.1em;
-          transition: border .15s;
-          &::after {
-            content: '';
-            position: absolute;
-            border: 0;
-            border-top: 0.15em solid red;
-            border-top-left-radius: 1em;
-            border-top-right-radius: 1em;
-            left: -0.1em;
-            right: 0.2em;
-            bottom: 0em;
-            top: -0.3em;
-            transform: rotate(-10deg);
-          }
-        }
+        @include circle-number($val);
       }
     }
   }
@@ -92,5 +59,14 @@ page-find-number {
   }
   75% {
     color: yellow;
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
   }
 }
